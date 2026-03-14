@@ -55,7 +55,7 @@ function MyPets() {
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
-  }, [isAuthenticated, isOwner, navigate]);
+  }, [isAuthenticated, isOwner, navigate, getRoleToken]);
 
   const refresh = async () => {
     setLoading(true);

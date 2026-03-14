@@ -41,7 +41,7 @@ function Owners() {
     
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
-  }, [isAuthenticated, isAdmin, navigate]);
+  }, [isAuthenticated, isAdmin, navigate, getRoleToken]);
 
   const handleDeleteOwner = async (ownerId) => {
     if (!window.confirm('Are you sure you want to delete this owner? This will also affect their pets.')) {

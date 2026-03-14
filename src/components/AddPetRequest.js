@@ -16,8 +16,8 @@ function AddPetRequest() {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [, setError] = useState('');
+  const [, setSuccess] = useState('');
   // Location state
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');

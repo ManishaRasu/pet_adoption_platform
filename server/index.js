@@ -50,7 +50,8 @@ const upload = multer({
 });
 
 // Use database name 'petad'
-mongoose.connect('mongodb://localhost:27017/petad')
+const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/petad';
+mongoose.connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 

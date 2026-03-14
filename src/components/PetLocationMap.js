@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // Fix default icon paths for Leaflet when bundling
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
@@ -20,7 +20,7 @@ L.Marker.prototype.options.icon = L.icon({
 });
 
 export default function PetLocationMap({ lat, lng, petName, height = 300 }) {
-  const navigate = useNavigate?.();
+
   const params = useParams?.();
 
   useEffect(() => {
@@ -32,7 +32,6 @@ export default function PetLocationMap({ lat, lng, petName, height = 300 }) {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    let marker;
     if (petName) {
       const safeName = String(petName);
       const shortName = safeName.length > 18 ? safeName.slice(0, 15) + '…' : safeName;
@@ -43,9 +42,9 @@ export default function PetLocationMap({ lat, lng, petName, height = 300 }) {
           <div style="margin-top:2px;"> <img src="${iconUrl}" alt="" style="width:25px;height:41px;display:block;" /> </div>
         </div>`;
       const customIcon = L.divIcon({ html, className: 'pet-name-marker', iconSize: [30, 55], iconAnchor: [15, 55] });
-      marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+      L.marker([lat, lng], { icon: customIcon }).addTo(map);
     } else {
-      marker = L.marker([lat, lng]).addTo(map);
+      L.marker([lat, lng]).addTo(map);
     }
 
     return () => map.remove();

@@ -34,7 +34,7 @@ export default function ChatPage() {
             }
         };
         fetchPet();
-    }, [id, isAuthenticated, isAdmin, navigate]);
+    }, [id, isAuthenticated, isAdmin, navigate, isOwner]);
 
     const loadMessages = async () => {
         try {

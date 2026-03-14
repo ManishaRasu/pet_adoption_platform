@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: tailmate-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - tailmate-network
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: tailmate-server
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongodb:27017/petad
+      - JWT_SECRET=your-secret-key
+    depends_on:
+      - mongodb
+    networks:
+      - tailmate-network
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    container_name: tailmate-client
+    ports:
+      - "3000:3000"
+    # CHOKIDAR_USEPOLLING is useful for React hot-reloading in some Docker Windows environments
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - server
+    networks:
+      - tailmate-network
+
+networks:
+  tailmate-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

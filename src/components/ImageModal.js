@@ -8,13 +8,14 @@ function ImageModal({ isOpen, imageUrl, altText, onClose }) {
     }
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
-  };
+
 
   React.useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
     if (isOpen) {
       document.addEventListener('keydown', handleKeyPress);
       document.body.style.overflow = 'hidden'; // Prevent background scrolling
@@ -24,7 +25,7 @@ function ImageModal({ isOpen, imageUrl, altText, onClose }) {
       document.removeEventListener('keydown', handleKeyPress);
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 

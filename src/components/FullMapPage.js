@@ -38,7 +38,7 @@ export default function FullMapPage() {
     const routingControlRef = useRef(null);
     const routingInitInProgressRef = useRef(false); // guard against double creation
     // Removed search functionality per request
-    const [isRoutingActive, setIsRoutingActive] = useState(true); // auto start road routing
+    const [isRoutingActive] = useState(true); // auto start road routing
     const [routeSummary, setRouteSummary] = useState(null); // {distance, time}
     const [routingError, setRoutingError] = useState(null);
     const [routingLibLoaded, setRoutingLibLoaded] = useState(false);
@@ -97,8 +97,8 @@ export default function FullMapPage() {
             const { latitude, longitude } = pos.coords;
             if (!userMarkerRef.current) {
                 const pulseHtml = `<div style="position:relative;width:18px;height:18px;">
-  <div style=\"position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;background:#2563eb;border:2px solid #fff;border-radius:50%;box-shadow:0 0 6px rgba(37,99,235,0.8);\"></div>
-  <div style=\"position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;animation:pulse 1.6s linear infinite;border:3px solid rgba(37,99,235,0.5);\"></div>
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;background:#2563eb;border:2px solid #fff;border-radius:50%;box-shadow:0 0 6px rgba(37,99,235,0.8);"></div>
+  <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;animation:pulse 1.6s linear infinite;border:3px solid rgba(37,99,235,0.5);"></div>
 </div>`;
                 const pulseIcon = L.divIcon({ html: pulseHtml, className: 'live-loc-icon', iconSize: [18, 18] });
                 userMarkerRef.current = L.marker([latitude, longitude], { icon: pulseIcon }).addTo(mapInstance.current).bindPopup('Your live location');
@@ -136,7 +136,7 @@ export default function FullMapPage() {
                     routingInitInProgressRef.current = true;
                     setRoutingLoading(true);
                     if (!routingLibLoaded) {
-                        const [{ default: mod }] = await Promise.all([
+                        await Promise.all([
                             import('leaflet-routing-machine')
                         ]).catch(err => { throw err });
                         // Inject CSS if not already
@@ -221,7 +221,6 @@ export default function FullMapPage() {
 
             watchIdRef.current = navigator.geolocation.watchPosition(async pos => {
                 handlePosition(pos);
-                const { latitude, longitude } = pos.coords;
             }, err => {
                 console.warn('Geolocation error:', err.message);
                 if (!userLocationInitializedRef.current) {
@@ -239,6 +238,7 @@ export default function FullMapPage() {
                 mapInstance.current = null;
             }
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pet]);
 
     // Event delegation for popup buttons after open

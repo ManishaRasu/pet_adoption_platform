@@ -1,0 +1,16 @@
+﻿
+D:\pet - Copy\tailmate\src\admin\AdoptedPets.js
+  14:9  warning  'error' is assigned a value but never used  no-unused-vars
+
+D:\pet - Copy\tailmate\src\components\Home.js
+   7:23  warning  'setSearchQuery' is assigned a value but never used  no-unused-vars
+  10:9   warning  'handleSearch' is assigned a value but never used    no-unused-vars
+
+D:\pet - Copy\tailmate\src\components\ImageModal.js
+  28:6  warning  React Hook React.useEffect has a missing dependency: 'onClose'. Either include it or remove the dependency array. If 'onClose' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+
+D:\pet - Copy\tailmate\src\components\PetLocationMap.js
+  4:10  warning  'useNavigate' is defined but never used  no-unused-vars
+
+Γ£û 5 problems (0 errors, 5 warnings)
+

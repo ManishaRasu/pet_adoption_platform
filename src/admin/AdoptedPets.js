@@ -11,7 +11,7 @@ function AdoptedPets() {
 	const navigate = useNavigate();
 	const [pets, setPets] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState('');
+	const [, setError] = useState('');
 	const [modalImage, setModalImage] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 

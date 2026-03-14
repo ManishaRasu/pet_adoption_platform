@@ -1,32 +1,11 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 import MapAllPets from './MapAllPets';
 
 function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      // Navigate to pets page with search query as URL parameter
-      navigate(`/pets?search=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      // If no search query, just go to pets page
-      navigate('/pets');
-    }
-  };
 
-  const handleSearchInputChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSearch(e);
-    }
-  };
   return (
     <div className="home-container">
       <div className="hero">

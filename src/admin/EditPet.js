@@ -487,8 +487,8 @@ function EditPet() {
               <button type="button" onClick={handleCancel} className="cancel-btn">
                 Cancel
               </button>
-              <button type="submit" className="submit-btn">
-                Update Pet
+              <button type="submit" className="submit-btn" disabled={saving}>
+                {saving ? 'Updating...' : 'Update Pet'}
               </button>
             </div>
           </form>

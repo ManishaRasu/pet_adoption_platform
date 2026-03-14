@@ -6,7 +6,7 @@ import OwnerNavbar from './OwnerNavbar';
 import './OwnerConversations.css';
 
 export default function OwnerConversations() {
-    const { isAuthenticated, token } = useAuth();
+    const { isAuthenticated } = useAuth();
     const [items, setItems] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
